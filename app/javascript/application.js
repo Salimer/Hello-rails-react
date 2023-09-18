@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Test from './components/test.js';
 import Greeting from './components/Greetings.js'
 
 function App() {
   return (
-  <>
-  <Test />
-  <Greeting />
-  <h1>Hello World!</h1>
-  </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Greeting />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
