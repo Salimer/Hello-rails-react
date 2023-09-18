@@ -1,28 +1,24 @@
 // app/javascript/components/Greeting.js
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import fetchGreeting from '../redux/thunk';
 
 function Greeting() {
-  const [greeting, setGreeting] = useState('');
-
-  // Fetch a random greeting from your Rails API
+  const greetingMsg = useSelector((store) => store.message.greeting);
+  const isLoading = useSelector((store) => store.message.isLoading);
+  const dispatch = useDispatch();
   useEffect(() => {
-    async function fetchGreeting() {
-      try {
-        const response = await fetch('/api/greetings/random'); // Your API endpoint
-        const data = await response.json();
-        setGreeting(data.message);
-      } catch (error) {
-        console.error('Error fetching greeting:', error);
-      }
-    }
+    dispatch(fetchGreeting())
+  }, [dispatch])
 
-    fetchGreeting();
-  }, []);
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <div>
       <h1>Random Greeting:</h1>
-      <p>{greeting}</p>
+      <p>{greetingMsg}</p>
     </div>
   );
 }
