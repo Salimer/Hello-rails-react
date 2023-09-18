@@ -8,9 +8,9 @@ function Greeting() {
   useEffect(() => {
     async function fetchGreeting() {
       try {
-        const response = await fetch('/random_greeting'); // Your API endpoint
+        const response = await fetch('/api/greetings/random'); // Your API endpoint
         const data = await response.json();
-        setGreeting(data.greeting);
+        setGreeting(data.message);
       } catch (error) {
         console.error('Error fetching greeting:', error);
       }
