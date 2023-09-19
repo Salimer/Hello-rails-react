@@ -3,7 +3,7 @@ import axios from 'axios';
 export const FETCH_GREETING_SUCCESS = 'FETCH_GREETING_SUCCESS';
 const url = '/api/greetings/random';
 
-const fetchGreeting = createAsyncThunk('greeting/fetchGreeting', async () => {
+const fetchGreeting = createAsyncThunk('greeting/fetchGreeting', async (thunkAPI) => {
   try {
     const response = await axios.get(url);
     return response.data;
